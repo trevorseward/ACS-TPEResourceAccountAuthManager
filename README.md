@@ -42,35 +42,26 @@ Before running the script, you'll need to gather the following information:
 
 ### 1. Configure Variables
 
-Edit the script and set the following variables:
+Import the module
 
 ```powershell
-$acsEndpoint = "https://your-acs-resource.europe.communication.azure.com"
-$accessKey = "your-acs-access-key"
-$resourceAccountObjectID = "your-resource-account-object-id"
-$tenantID = "your-tenant-id"
+Import-Module ./ResourceAccountAuthorizationToACS.psm1
 ```
 
 ### 2. Choose Operation
 
-Uncomment the relevant section based on the operation you want to perform:
-
 #### Authorize a Resource Account (PUT)
 
-Uncomment the `### PUT SECTION ###` to grant authorization:
-
 ```powershell
-# Uncomment lines 156-171 in the script
+New-AcsResourceAccountAssignment -acsEndpoint <ACSEndPoint_Value> -accessKey <ACSAccessKey> -tenantID <TenantID> -resourceAccountObjectID <ResourceAccountObjectID>
 ```
 
 Expected response: `201 Created` on success
 
 #### Check Authorization Status (GET)
 
-Uncomment the `### GET SECTION ###` to verify authorization:
-
 ```powershell
-# Uncomment lines 202-221 in the script
+Get-AcsResourceAccountAssignment -acsEndpoint <ACSEndPoint_Value> -accessKey <ACSAccessKey> -tenantID <TenantID> -resourceAccountObjectID <ResourceAccountObjectID>
 ```
 
 Expected responses:
@@ -79,21 +70,11 @@ Expected responses:
 
 #### Remove Authorization (DELETE)
 
-Uncomment the `### DELETE SECTION ###` to revoke authorization:
-
 ```powershell
-# Uncomment lines 176-194 in the script
+Remove-AcsResourceAccountAssignment -acsEndpoint <ACSEndPoint_Value> -accessKey <ACSAccessKey> -tenantID <TenantID> -resourceAccountObjectID <ResourceAccountObjectID>
 ```
 
 Expected response: `204 No Content` on success
-
-### 3. Run the Script
-
-Execute the script in PowerShell:
-
-```powershell
-.\ResourceAccountAuthorizationToACS.ps1
-```
 
 ## Functions
 
